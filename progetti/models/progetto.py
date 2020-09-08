@@ -47,7 +47,7 @@ class Progetto(models.Model):
         )
 
     def __str__(self):
-        return "P_" + self.id
+        return "P_" + str(self.id)
 
     def get_absolute_url(self):
         """Returns the URL to access a particular instance of the model."""

@@ -21,7 +21,7 @@ class UsoMateriale(models.Model):
         )
 
     def __str__(self):
-        return "UM_" + self.id
+        return "UM_" + str(self.id)
 
     def get_absolute_url(self):
         """Returns the URL to access a particular instance of the model."""
