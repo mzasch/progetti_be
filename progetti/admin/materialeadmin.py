@@ -3,4 +3,5 @@ from progetti.models import Materiale
 
 @admin.register(Materiale)
 class MaterialeAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('nome', 'descrizione')
+

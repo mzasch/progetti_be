@@ -3,4 +3,4 @@ from progetti.models import Esterno
 
 @admin.register(Esterno)
 class EsternoAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('nome', 'descrizione')
