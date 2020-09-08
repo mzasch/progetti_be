@@ -2,6 +2,11 @@ from django.db import models
 
 '''Modello per gli oggetti Progetto'''
 class Progetto(models.Model):
+    class Meta:
+        ordering = ['titolo']
+        verbose_name = "Progetto"
+        verbose_name_plural = "Progetti"
+
     titolo = models.CharField(
             max_length=50, 
             help_text="Titolo del progetto",
@@ -41,9 +46,11 @@ class Progetto(models.Model):
             # limit_choices_to={'is_funz_strum': True},
         )
 
-    class Meta:
-        ordering = ['titolo']
-        verbose_name = "Progetto"
-        verbose_name_plural = "Progetti"
+    def __str__(self):
+        return "P_" + self.id
+
+    def get_absolute_url(self):
+        """Returns the URL to access a particular instance of the model."""
+        return reverse('model-detail-view', args=[str(self.id)])
 
 

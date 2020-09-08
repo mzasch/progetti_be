@@ -2,6 +2,11 @@ from django.db import models
 
 '''Modello per gli oggetti UsoMateriale'''
 class UsoMateriale(models.Model):
+    class Meta:
+        ordering = ['progetto', 'materiale']
+        verbose_name = "Utilizzo"
+        verbose_name_plural = "Utilizzi"
+
     materiale=models.ForeignKey(
             'Materiale', # modello della chiave esterna
             on_delete=models.CASCADE,
@@ -15,9 +20,11 @@ class UsoMateriale(models.Model):
             verbose_name="Progetto",
         )
 
-    class Meta:
-        ordering = ['progetto', 'materiale']
-        verbose_name = "Utilizzo"
-        verbose_name_plural = "Utilizzi"
+    def __str__(self):
+        return "UM_" + self.id
+
+    def get_absolute_url(self):
+        """Returns the URL to access a particular instance of the model."""
+        return reverse('model-detail-view', args=[str(self.id)])
 
 
