@@ -14,3 +14,10 @@ class UsoMateriale(models.Model):
             help_text="Il progetto per il quale si usa questo materiale",
             verbose_name="Progetto",
         )
+
+    class Meta:
+        ordering = ['progetto', 'materiale']
+        verbose_name = "Utilizzo"
+        verbose_name_plural = "Utilizzi"
+
+

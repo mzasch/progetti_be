@@ -2,12 +2,12 @@ from django.db import models
 
 '''Modello per gli oggetti Progetto'''
 class Progetto(models.Model):
-    nome = models.CharField(
+    titolo = models.CharField(
             max_length=50, 
-            help_text="Nome del progetto",
-            verbose_name="Nome Progetto",
+            help_text="Titolo del progetto",
+            verbose_name="Titolo Progetto",
         )
-    obiettvi = models.TextField(
+    obiettivi = models.TextField(
             max_length=200, # max_length non ha valore a livello del db
             help_text="Obiettivi del progetto",
         )
@@ -40,4 +40,10 @@ class Progetto(models.Model):
             verbose_name="FS referente",
             # limit_choices_to={'is_funz_strum': True},
         )
+
+    class Meta:
+        ordering = ['titolo']
+        verbose_name = "Progetto"
+        verbose_name_plural = "Progetti"
+
 

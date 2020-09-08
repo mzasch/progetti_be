@@ -18,3 +18,10 @@ class FunzioneStrumentale(models.Model):
             help_text="Docente incaricato per questa FS",
             verbose_name="Docente",
         )
+
+    class Meta:
+        ordering = ['nome']
+        verbose_name = "Funzione Strumentale"
+        verbose_name_plural = "Funzioni Strumentali"
+
+
