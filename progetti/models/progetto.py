@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 '''Modello per gli oggetti Progetto'''
 class Progetto(models.Model):
@@ -8,7 +9,7 @@ class Progetto(models.Model):
         verbose_name_plural = "Progetti"
 
     titolo = models.CharField(
-            max_length=50, 
+            max_length=50,
             help_text="Titolo del progetto",
             verbose_name="Titolo Progetto",
         )
@@ -29,19 +30,19 @@ class Progetto(models.Model):
             verbose_name="Esterni coinvolti",
         )
     n_ore_previste = models.PositiveSmallIntegerField(
-            help_text="Numero totale di ore previste", 
+            help_text="Numero totale di ore previste",
             verbose_name="Ore previste",
         )
     doc_referente = models.ForeignKey(
             'Docente', # modello della chiave esterna
             on_delete=models.RESTRICT,
-            help_text="Docente responsabile del progetto", 
+            help_text="Docente responsabile del progetto",
             verbose_name="Docente referente",
         )
     fs_referente = models.ForeignKey(
             'FunzioneStrumentale', # modello della chiave esterna
             on_delete=models.RESTRICT,
-            help_text="Funzione stumentale referente del progetto", 
+            help_text="Funzione stumentale referente del progetto",
             verbose_name="FS referente",
             # limit_choices_to={'is_funz_strum': True},
         )
@@ -51,6 +52,4 @@ class Progetto(models.Model):
 
     def get_absolute_url(self):
         """Returns the URL to access a particular instance of the model."""
-        return reverse('model-detail-view', args=[str(self.id)])
-
-
+        return reverse('progetti-detail', args=[str(self.id)])

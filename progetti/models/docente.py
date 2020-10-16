@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 '''Modello per gli oggetti Docente'''
 class Docente(models.Model):
@@ -7,14 +8,12 @@ class Docente(models.Model):
         verbose_name = "Docente"
         verbose_name_plural = "Docenti"
 
-    nome = models.CharField(max_length=50) 
-    cognome = models.CharField(max_length=50) 
+    nome = models.CharField(max_length=50)
+    cognome = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.cognome + ", " + self.nome[0] + "."
+        return self.cognome + " " + self.nome
 
     def get_absolute_url(self):
         """Returns the URL to access a particular instance of the model."""
-        return reverse('model-detail-view', args=[str(self.id)])
-
-
+        return reverse('docenti-detail', args=[str(self.id)])

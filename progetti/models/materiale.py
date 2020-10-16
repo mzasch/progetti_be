@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 '''Modello per gli oggetti Materiale'''
 class Materiale(models.Model):
@@ -15,6 +16,4 @@ class Materiale(models.Model):
 
     def get_absolute_url(self):
         """Returns the URL to access a particular instance of the model."""
-        return reverse('model-detail-view', args=[str(self.id)])
-
-
+        return reverse('materiali-detail', args=[str(self.id)])

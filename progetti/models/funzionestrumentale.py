@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 '''Modello per gli oggetti FunzioneStrumentale'''
 class FunzioneStrumentale(models.Model):
@@ -9,7 +10,7 @@ class FunzioneStrumentale(models.Model):
 
 
     nome=models.CharField(
-            max_length=30,
+            max_length=50,
             help_text="Nome della funzione strumentale",
             verbose_name="Funzione Strumentale",
         )
@@ -30,7 +31,4 @@ class FunzioneStrumentale(models.Model):
 
     def get_absolute_url(self):
         """Returns the URL to access a particular instance of the model."""
-        return reverse('model-detail-view', args=[str(self.id)])
-
-
-
+        return reverse('fs-detail', args=[str(self.id)])
