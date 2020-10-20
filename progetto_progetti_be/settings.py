@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'progetti',
+    'oauth2_provider',
 ]
 
 MIDDLEWARE = [
@@ -114,6 +115,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Modifiche per usare OAuth2
+AUTH_USER_MODEL = 'progetti.User'
+LOGIN_URL='/admin/login/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+    )
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/

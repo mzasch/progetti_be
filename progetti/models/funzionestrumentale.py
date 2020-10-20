@@ -19,7 +19,7 @@ class FunzioneStrumentale(models.Model):
             help_text="Descrizione della funzione strumentale",
             verbose_name="Descrizione FS",
         )
-    docente_fs=models.ForeignKey(
+    docente_fs=models.OneToOneField(
             'Docente', # modello della chiave esterna
             on_delete=models.RESTRICT,
             help_text="Docente incaricato per questa FS",
