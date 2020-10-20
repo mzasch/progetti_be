@@ -1,12 +1,11 @@
 from rest_framework import serializers
-from progetti.models import Docente, Esterno, FunzioneStrumentale, Materiale, Progetto, UsoMateriale
+from progetti.models import User, Esterno, FunzioneStrumentale, Materiale, Progetto
 
-class DocenteSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     url = serializers.CharField(source='get_absolute_url', read_only=True)
     class Meta:
-        model = Docente
-        fields = ['nome', 'cognome', 'url']
-        read_only_fields = ['id']
+        model = User
+        fields = ['id', 'username', 'snippets']
 
 class EsternoSerializer(serializers.ModelSerializer):
     url = serializers.CharField(source='get_absolute_url', read_only=True)
@@ -32,6 +31,7 @@ class MaterialeSerializer(serializers.ModelSerializer):
 
 class ProgettoSerializer(serializers.ModelSerializer):
     url = serializers.CharField(source='get_absolute_url', read_only=True)
+    #doc_referente = serializers.ReadOnlyField(source='doc_referente.username')
     class Meta:
         model = Progetto
         fields = ['titolo', 'obiettivi',

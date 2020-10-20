@@ -34,7 +34,7 @@ class Progetto(models.Model):
             verbose_name="Ore previste",
         )
     doc_referente = models.ForeignKey(
-            'Docente', # modello della chiave esterna
+            'User', # modello della chiave esterna
             on_delete=models.RESTRICT,
             help_text="Docente responsabile del progetto",
             verbose_name="Docente referente",
@@ -46,6 +46,7 @@ class Progetto(models.Model):
             verbose_name="FS referente",
             # limit_choices_to={'is_funz_strum': True},
         )
+    materiali = models.ManyToManyField('Materiale')
 
     def __str__(self):
         return "P_" + str(self.id)

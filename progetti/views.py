@@ -1,14 +1,14 @@
-from progetti.models import Docente, Esterno, FunzioneStrumentale, Materiale, Progetto
-from progetti.serializers import DocenteSerializer, EsternoSerializer, FunzioneStrumentaleSerializer, MaterialeSerializer, ProgettoSerializer
+from progetti.models import User, Esterno, FunzioneStrumentale, Materiale, Progetto
+from progetti.serializers import UserSerializer, EsternoSerializer, FunzioneStrumentaleSerializer, MaterialeSerializer, ProgettoSerializer
 from rest_framework import generics
 
-class DocenteList(generics.ListCreateAPIView):
-    queryset = Docente.objects.all()
-    serializer_class = DocenteSerializer
+class UserList(generics.ListCreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
-class DocenteDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Docente.objects.all()
-    serializer_class = DocenteSerializer
+class UserDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 class EsternoList(generics.ListCreateAPIView):
     queryset = Esterno.objects.all()
@@ -37,6 +37,9 @@ class MaterialeDetail(generics.RetrieveUpdateDestroyAPIView):
 class ProgettoList(generics.ListCreateAPIView):
     queryset = Progetto.objects.all()
     serializer_class = ProgettoSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(doc_referente=self.request.user)
 
 class ProgettoDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Progetto.objects.all()

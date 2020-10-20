@@ -8,7 +8,6 @@ class FunzioneStrumentale(models.Model):
         verbose_name = "Funzione Strumentale"
         verbose_name_plural = "Funzioni Strumentali"
 
-
     nome=models.CharField(
             max_length=50,
             help_text="Nome della funzione strumentale",
@@ -20,7 +19,7 @@ class FunzioneStrumentale(models.Model):
             verbose_name="Descrizione FS",
         )
     docente_fs=models.OneToOneField(
-            'Docente', # modello della chiave esterna
+            'User', # modello della chiave esterna
             on_delete=models.RESTRICT,
             help_text="Docente incaricato per questa FS",
             verbose_name="Docente",
