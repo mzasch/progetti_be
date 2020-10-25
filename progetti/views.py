@@ -1,10 +1,11 @@
 from progetti.models import User, Esterno, FunzioneStrumentale, Materiale, Progetto
 from progetti.serializers import UserSerializer, EsternoSerializer, FunzioneStrumentaleSerializer, MaterialeSerializer, ProgettoSerializer
-from rest_framework import generics
+from rest_framework import generics, permissions
 
 class UserList(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
@@ -37,9 +38,7 @@ class MaterialeDetail(generics.RetrieveUpdateDestroyAPIView):
 class ProgettoList(generics.ListCreateAPIView):
     queryset = Progetto.objects.all()
     serializer_class = ProgettoSerializer
-
-    def perform_create(self, serializer):
-        serializer.save(doc_referente=self.request.user)
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 class ProgettoDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Progetto.objects.all()

@@ -20,12 +20,15 @@ from django.views.generic import RedirectView
 
 from django.conf import settings
 from django.conf.urls.static import static
+#from django.contrib.auth.views import logout
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('chilesotti/', include('progetti.urls')),
     path('api-auth/', include('rest_framework.urls')),
-    path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
+    path('', include('social_django.urls', namespace='social')),
+    #path('logout/', logout, {'next_page': settings.LOGOUT_REDIRECT_URL}, name='logout'),
+    #path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
     path('', RedirectView.as_view(url='chilesotti/', permanent=True)),
 
 ]
