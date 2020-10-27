@@ -5,7 +5,7 @@ from rest_framework import generics, permissions
 class UserList(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    #permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
@@ -38,7 +38,7 @@ class MaterialeDetail(generics.RetrieveUpdateDestroyAPIView):
 class ProgettoList(generics.ListCreateAPIView):
     queryset = Progetto.objects.all()
     serializer_class = ProgettoSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    #permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 class ProgettoDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Progetto.objects.all()

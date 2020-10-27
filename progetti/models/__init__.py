@@ -1,4 +1,4 @@
-from .progetto import Progetto
+from .progetto import *
 from .funzionestrumentale import FunzioneStrumentale
 from .materiale import Materiale
 from .esterno import Esterno
