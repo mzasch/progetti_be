@@ -5,6 +5,8 @@ from . import views
 from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = [
+    path('', views.index, name='index'),
+
     path('progetti/', views.ProgettoList.as_view(), name='progetti'),
     path('progetti/<int:pk>/', views.ProgettoDetail.as_view(), name='progetti-detail'),
 
@@ -19,8 +21,6 @@ urlpatterns = [
 
     path('fs/', views.FunzioneStrumentaleList.as_view(), name='fs'),
     path('fs/<int:pk>/', views.FunzioneStrumentaleDetail.as_view(), name='fs-detail'),
-
-    path('', RedirectView.as_view(url='progetti/', permanent=True)),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

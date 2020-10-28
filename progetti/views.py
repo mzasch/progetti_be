@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from progetti.models import User, Esterno, FunzioneStrumentale, Materiale, Progetto
 from progetti.serializers import UserSerializer, EsternoSerializer, FunzioneStrumentaleSerializer, MaterialeSerializer, ProgettoSerializer
 from rest_framework import generics, permissions
@@ -43,3 +44,12 @@ class ProgettoList(generics.ListCreateAPIView):
 class ProgettoDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Progetto.objects.all()
     serializer_class = ProgettoSerializer
+
+def index(request):
+    """View function for home page of site."""
+
+    context = {
+    }
+
+    # Render the HTML template index.html with the data in the context variable
+    return render(request, 'index.html', context=context)

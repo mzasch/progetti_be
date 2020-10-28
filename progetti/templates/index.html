@@ -1,0 +1,11 @@
+{% load socialaccount %}
+{% providers_media_js %}
+<!DOCTYPE html>
+<html>
+	<head><title>Prova login</title></head>
+	<body>
+		<p>Hello, my name is {{user}}!</p>
+		<button><a href="{% provider_login_url "google" %}">Google Login</a></button>
+		<button><a href="accounts/logout/">Google Logout</a></button>
+	</body>
+</html>
