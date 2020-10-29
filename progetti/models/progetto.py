@@ -19,6 +19,20 @@ class Progetto(models.Model):
             max_length=200, # max_length non ha valore a livello del db
             help_text="Obiettivi del progetto",
         )
+
+    STATUS = Choices(
+       (1, 'presentato',    _('Presentato')),
+       (2, 'approvato_fs',  _('Approvato dalla Funzione strumentale')),
+       (3, 'approvato_ds',  _('Approvato da DS / DSGA')),
+       (4, 'approvato',     _('Tutte le classi del triennio')),
+    )
+    stato_progetto = models.PositiveSmallIntegerField(
+            choices=STATUS,
+            default=STATUS.presentato,
+            verbose_name="Stato del progetto",
+            help_text="Situazione dell'approvazione del progetto",
+        )
+
     n_docenti_dest = models.PositiveSmallIntegerField(
             help_text="Numero di docenti destinatari",
             verbose_name="Docenti destinatari",
@@ -30,10 +44,6 @@ class Progetto(models.Model):
     n_esterni = models.PositiveSmallIntegerField(
             help_text="Numero di esterni coinvolti",
             verbose_name="Esterni coinvolti",
-        )
-    n_ore_previste = models.PositiveSmallIntegerField(
-            help_text="Numero totale di ore previste",
-            verbose_name="Ore previste",
         )
     doc_referente = models.ForeignKey(
             'User', # modello della chiave esterna
@@ -86,10 +96,21 @@ class Progetto(models.Model):
         """Returns the URL to access a particular instance of the model."""
         return reverse('progetti-detail', args=[str(self.id)])
 
+    def get_ore_progettazione(self):
+        return sum([p.numeroOre for p in Progettazione.objects.filter(progetto=self)])
+
+    def get_ore_realizzazione(self):
+        return sum([p.numeroOre for p in Realizzazione.objects.filter(progetto=self)])
+
+    def get_totale_ore_previste(self):
+        """Restituisce il monte ore totale previsto per il progetto."""
+        return (self.get_ore_progettazione() + self.get_ore_realizzazione())
+
     def get_percentuale_prog(self):
-        ore_progettazione = sum([p.numeroOre
-                                for p in Progettazione.objects.filter(progetto=self)])
-        return ore_progettazione / self.n_ore_previste
+        """Restituisce la percentuale di ore di progettazione
+        rispetto al monte ore totale previsto."""
+        ore_totali = self.get_totale_ore_previste()
+        return (self.get_ore_progettazione() / ore_totali) if ore_totali else 0
 
 class Progettazione(models.Model):
     TIPO_ORE = Choices(
