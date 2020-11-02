@@ -56,6 +56,7 @@ class Progetto(models.Model):
             on_delete=models.RESTRICT,
             help_text="Funzione stumentale referente del progetto",
             verbose_name="FS referente",
+            related_name="progetti_assegnati",
             # limit_choices_to={'is_funz_strum': True},
         )
 

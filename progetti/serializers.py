@@ -29,9 +29,16 @@ class EsternoSerializer(serializers.ModelSerializer):
 class FunzioneStrumentaleSerializer(serializers.ModelSerializer):
     url = serializers.CharField(source='get_absolute_url', read_only=True)
     docente_fs = serializers.HyperlinkedRelatedField(read_only=True, view_name='docenti-detail')
+
+    progetti_assegnati = serializers.HyperlinkedRelatedField(
+                                many=True,
+                                read_only= True,
+                                view_name='progetti-detail'
+                            )
+
     class Meta:
         model = FunzioneStrumentale
-        fields = ['nome', 'descrizione', 'docente_fs', 'url']
+        fields = ['nome', 'descrizione', 'docente_fs', 'url', 'progetti_assegnati']
         read_only_fields = ['id', 'docente_fs']
 
 class MaterialeSerializer(serializers.ModelSerializer):
